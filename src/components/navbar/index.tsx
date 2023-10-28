@@ -2,8 +2,8 @@ import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "./constants";
 import { getBreadcrumbRoute, getCurrentRoute } from "./methods";
-
-const { Header, Content, Sider } = Layout;
+import "./style.css";
+const { Header, Sider } = Layout;
 export const NavBar = () => {
   const {
     token: { colorBgContainer },
@@ -12,12 +12,12 @@ export const NavBar = () => {
 
   return (
     <Layout>
-      <Sider style={{ height: "100vh", position: "absolute", left: 0, top: 0 }}>
+      <Sider>
         <div className="demo-logo-vertical">Home</div>
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={[getCurrentRoute(location)?.key || "0"]}
+          defaultSelectedKeys={[getCurrentRoute(location)?.key]}
           items={routes.map((item) => {
             return {
               ...item,
@@ -29,13 +29,7 @@ export const NavBar = () => {
       <Layout>
         <Header
           style={{
-            padding: 16,
             background: colorBgContainer,
-            alignItems: "center",
-            display: "flex",
-            position: "absolute",
-            top: 0,
-            width: `calc(100% - 200px)`,
           }}
         >
           <Breadcrumb items={getBreadcrumbRoute(location)} />
